@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = 'BLA'
 app.config["MYSQL_USER"] = "bf14e622f6f4c1"
 app.config["MYSQL_PASSWORD"] = "6d245eb6"
-app.config["MYSQL_DB"] = "gyft_db"
+app.config["MYSQL_DB"] = "heroku_8b9c59c73ae5d38"
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
