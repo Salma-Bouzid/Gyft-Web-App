@@ -5,8 +5,8 @@ import os
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = 'BLA'
-app.config["MYSQL_USER"] = "root"
-app.config["MYSQL_PASSWORD"] = ""
+app.config["MYSQL_USER"] = "bf14e622f6f4c1"
+app.config["MYSQL_PASSWORD"] = "6d245eb6"
 app.config["MYSQL_DB"] = "gyft_db"
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
