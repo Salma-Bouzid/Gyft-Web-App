@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<!--
+	Projection by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+	<head>
+		<title>Artist Sign Up</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="static/css/main.css" />
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="inner">
+					<a href="/" class="logo"><strong>Gyft</strong></a>
+					<nav id="nav">
+						<a href="/">Home</a>
+					</nav>
+					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+				</div>
+			</header>
+
+		<!-- Main -->
+			<section id="main" class="wrapper">
+				<div class="inner">
+					<header class="align-center">
+						<h2>Join our Artist Pool</h2>
+						<p> Let us know more about you :)</p>
+					</header>
+
+
+               <div style="width:800px; margin-left:330px;">
+					    <form  action="/artist" method="POST" >
+								<div class="row uniform">
+									<div class="4u 12u$(xsmall)">
+					        <label for="first_name" class="sr-only">First Name </label>
+					        <input type="Text" id="first_name" class="form-control" placeholder="first name" required autofocus name="first_name">
+								</div>
+								<div class="4u 12u$(xsmall)">
+					        <label for="last_name" class="sr-only">Last Name </label>
+					        <input type="Text" id="last_name" class="form-control" placeholder="last name" required autofocus name="last_name">
+								</div>
+								<div class="8u$">
+					        <label for="inputEmail" class="sr-only">Email address</label>
+					        <input type="email" id="email" class="form-control" placeholder="Email address" required autofocus name="email">
+								</div>
+								<div class="8u$">
+									<div class="select-wrapper">
+					            <select name="domain"  placeholder="Select your discipline">
+												<option value="">Select your discipline </option>
+
+					                <option value="Graphic Design">Graphic Design</option>
+					                <option value="Illustrator">Illustrator</option>
+					                <option value="Animator">Animator</option>
+					                <option value="Digital Designer">Digital Designer</option>
+					                <option value="Photographer">Photographer</option>
+					                <option value="Filmmaker">Filmmaker</option>
+
+					            </select>
+										</div>
+					        </div>
+									<div class="8u$">
+										<div class="select-wrapper">
+
+					            <select name="experience" placeholder="Experience">
+												<option value="">How many years have you worked? </option>
+					                <option value="less than 1 year"> less than 1 year </option>
+					                <option value="between 1 and 2"> between 1 and 2</option>
+					                <option value="Abetween 2 and 3">between 2 and 3</option>
+					                <option value="between 3 and 4">between 3 and 4</option>
+					                <option value="between 4 and 5">between 4 and 5</option>
+					            </select>
+										</div>
+					        </div>
+
+					        <br>
+									<div class="12u$" >
+					        <input type="submit" value="Submit" style="margin-left:170px;">
+									{% with messages = get_flashed_messages(with_categories="signup_danger") %}
+			  					{% for category, message in messages %}
+			    				<div style="margin-left:160px; margin-top:20px"><div class="{{ category }}">{{ message }}</div>
+			  					{% endfor %}
+									{% endwith %}
+									<br>
+								</div></div>
+
+					    </form>
+						</div>
+
+						<br>
+						<br>
+
+
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/skel.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+	</body>
+</html>
