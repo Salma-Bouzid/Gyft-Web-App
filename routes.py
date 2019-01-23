@@ -4,6 +4,7 @@ from passlib.hash import pbkdf2_sha256
 import os
 
 app = Flask(__name__)
+app.config['MYSQL_HOST'] = 'eu-cdbr-west-02.cleardb.net'
 app.config["SECRET_KEY"] = 'BLA'
 app.config["MYSQL_USER"] = "bf14e622f6f4c1"
 app.config["MYSQL_PASSWORD"] = "6d245eb6"
