@@ -186,10 +186,17 @@ def multiple_buttons(condition):
     else:
         return redirect(url_for('login'))
 
+
 @app.route('/showall',methods=['POST'])
 def showall():
-    return multiple_buttons(None)
-
+    if session.get("email"):
+        curl = mysql.connection.cursor()
+        curl.execute("SELECT * FROM freelancers")
+        data = curl.fetchall()
+        curl.close()
+        return render_template(
+            "findworkforce.html",
+            freelancers=data)
 
 @app.route('/illustrator',methods=['POST'])
 def illustrator():
