@@ -3,11 +3,11 @@ It is hosted on the Heroku server and can be viewed in this link: https://gyft-d
 
 To check the app:
 
-  1.Create a recruiter login
+   1.Create a recruiter login
           
-  2.Check the recruiter dashboard where you can create projects and see statistics about the freelancers in the database.
+   2.Check the recruiter dashboard where you can create projects and see statistics about the freelancers in the database.
           
-  3.Freelancers can  sign up and add their details through the artist sign up.
+   3.Freelancers can  sign up and add their details through the artist sign up.
   
   This project has been conducted for the Database and Web Services course at Jacobs University in fall 2018.
   
