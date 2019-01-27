@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_mysqldb import MySQL
 from passlib.hash import pbkdf2_sha256
 import os
+from flask import Flask, render_template, request,
+redirect, url_for, session, flash
+
 
 app = Flask(__name__)
 app.config['MYSQL_HOST'] = 'eu-cdbr-west-02.cleardb.net'
@@ -23,11 +25,12 @@ def index():
         contact_email = request.form["contact_email"]
         message = request.form["message"]
         cur = mysql.connection.cursor()
-        cur.execute(f"INSERT INTO messages (full_name,contact_email,message) VALUES ({full_name!r}, {contact_email!r}, {message!r})")
+        cur.execute(f"INSERT INTO messages(full_name, contact_email, message) \
+                     VALUES ({full_name!r}, {contact_email!r}, {message!r})")
         mysql.connection.commit()
-        flash('You successfully sent us a message :)', category='message_success')
+        flash('You successfully sent us a message!',
+              category='message_success')
         return render_template("index.html")
-
 
 
 @app.route('/artist', methods=['POST', 'GET'])
@@ -42,14 +45,17 @@ def artist():
         experience = request.form["experience"]
         email = request.form["email"]
         cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM users WHERE email LIKE %s", [email])  #check id email already exists
-        if len(cur.fetchall()) >0:
+        cur.execute("SELECT * FROM users WHERE email LIKE %s", [email])
+        if len(cur.fetchall()) > 0:
             flash('Oups! This email already exists!', category='danger')
             return render_template("artist_signup.html")
         else:
-            cur.execute(f"INSERT INTO freelancers (first_name,last_name, email,domain, experience) VALUES ({first_name!r}, {last_name!r}, {email!r}, {domain!r}, {experience!r})")
+            cur.execute(f"INSERT INTO freelancers(first_name, last_name,
+                        email, domain, experience) VALUES({first_name!r},
+                        {last_name!r}, {email!r}, {domain!r}, {experience!r})")
             mysql.connection.commit()
-            flash('You successfully joined our artist pool :)', category='success')
+            flash('You successfully joined our artist pool :)',
+                  category='success')
             return render_template("index.html")
 
 
@@ -63,12 +69,13 @@ def recruiter_signup():
         # insert the new user into the database:
         password = pbkdf2_sha256.hash(request.form["password"])
         cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM users WHERE email LIKE %s", [email])  #check id email already exists
-        if len(cur.fetchall()) >0:
+        cur.execute("SELECT * FROM users WHERE email LIKE %s", [email])
+        if len(cur.fetchall()) > 0:
             flash('Oups! This email already exists!', 'signup_danger')
             return render_template("recruiter_signup.html")
         else:
-            cur.execute(f"INSERT INTO users (username, email, password) VALUES ({username!r}, {email!r}, {password!r})")
+            cur.execute(f"INSERT INTO users(username, email, password) \
+                        VALUES({username!r}, {email!r}, {password!r})")
             mysql.connection.commit()
             session["username"] = request.form["username"]
             session["email"] = request.form["email"]
@@ -88,31 +95,29 @@ def recruiter():
             data = curl.fetchall()
             username = session.get("username")
             domain_dict = {}
-            select_stmt = ("SELECT domain ,COUNT(*) FROM freelancers GROUP BY DOMAIN")
+            select_stmt = ("SELECT domain ,COUNT(*) \
+                            FROM freelancers GROUP BY DOMAIN")
             curl.execute(select_stmt)
-            tuples=curl.fetchall()
+            tuples = curl.fetchall()
             domain_dic = {}
             for i in range(len(tuples)):
-              k = list(tuples[i].values())[0]
-              v = list(tuples[i].values())[1]
-              domain_dic[k]=v
-
-            get_exp = ("SELECT experience, COUNT(*)  FROM freelancers GROUP BY experience;")
+                k = list(tuples[i].values())[0]
+                v = list(tuples[i].values())[1]
+                domain_dic[k] = v
+            get_exp = ("SELECT experience, COUNT(*) \
+                        FROM freelancers GROUP BY experience;")
             curl.execute(get_exp)
-            tuples=curl.fetchall()
+            tuples = curl.fetchall()
             exp_dic = {}
             for i in range(len(tuples)):
-              k = list(tuples[i].values())[0]
-              v = list(tuples[i].values())[1]
-
-              exp_dic[k]=float(v)
-
+                k = list(tuples[i].values())[0]
+                v = list(tuples[i].values())[1]
+                exp_dic[k] = float(v)
             curl.close()
             return render_template(
-                "recruiter_2.html",
-                projects=data,
-                domain_dic=domain_dic, exp_dic = exp_dic, username=username)
-
+                "recruiter_2.html", projects=data,
+                domain_dic=domain_dic,
+                exp_dic=exp_dic, username=username)
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -125,7 +130,8 @@ def login():
         user = curl.fetchone()
         curl.close()
         if user is None:
-            flash('Oups! This email address does not exist.', category='danger')
+            flash('Oups! This email address does not exist.',
+                  category='danger')
             return render_template("recruiter_login.html")
 
         elif len(user) > 0:
@@ -141,7 +147,7 @@ def login():
         return render_template("recruiter_login.html")
 
 
-@app.route('/create_project',methods=['POST', 'GET'])
+@app.route('/create_project', methods=['POST', 'GET'])
 def create_project():
         if request.method == 'GET':
             return render_template('create_project_2.html')
@@ -152,7 +158,10 @@ def create_project():
             skill_level = request.form["skill_level"]
             # insert the new user into the database:
             cur = mysql.connection.cursor()
-            cur.execute(f"INSERT INTO projects (project_title, contact_email, project_des, skill_level) VALUES ({project_title!r}, {contact_email!r}, {project_des!r}, {skill_level!r})")
+            cur.execute(f"INSERT INTO projects(project_title,
+                        contact_email, project_des, skill_level)
+                        VALUES({project_title!r}, {contact_email!r},
+                        {project_des!r}, {skill_level!r})")
             mysql.connection.commit()
             session["project_title"] = request.form["project_title"]
             session["contact_email"] = request.form["contact_email"]
@@ -161,7 +170,8 @@ def create_project():
             flash('You added a new project', category="success")
             return redirect(url_for("recruiter"))
 
-@app.route('/find_artist',methods=['POST', 'GET'])
+
+@app.route('/find_artist', methods=['POST', 'GET'])
 def find_artist():
     if session.get("email"):
         curl = mysql.connection.cursor()
@@ -174,10 +184,12 @@ def find_artist():
     else:
         return redirect(url_for('login'))
 
+
 def multiple_buttons(condition):
     if session.get("email"):
         curl = mysql.connection.cursor()
-        curl.execute("SELECT * FROM freelancers WHERE domain LIKE %s", [condition])
+        curl.execute("SELECT * FROM freelancers WHERE domain LIKE %s",
+                     [condition])
         data = curl.fetchall()
         curl.close()
         return render_template(
@@ -187,7 +199,7 @@ def multiple_buttons(condition):
         return redirect(url_for('login'))
 
 
-@app.route('/showall',methods=['POST'])
+@app.route('/showall', methods=['POST'])
 def showall():
     if session.get("email"):
         curl = mysql.connection.cursor()
@@ -198,28 +210,30 @@ def showall():
             "findworkforce.html",
             freelancers=data)
 
-@app.route('/illustrator',methods=['POST'])
+
+@app.route('/illustrator', methods=['POST'])
 def illustrator():
     return multiple_buttons('Illustrator')
 
-@app.route('/digital',methods=['POST'])
+
+@app.route('/digital', methods=['POST'])
 def digital():
     return multiple_buttons('Digital Designer')
 
-@app.route('/filmmaker',methods=['POST'])
+
+@app.route('/filmmaker', methods=['POST'])
 def filmmaker():
     return multiple_buttons('Filmmaker')
 
-@app.route('/graphic',methods=['POST'])
+
+@app.route('/graphic', methods=['POST'])
 def graphic():
     return multiple_buttons('Graphic Design')
 
 
-@app.route('/photographer',methods=['POST'])
+@app.route('/photographer', methods=['POST'])
 def photographer():
     return multiple_buttons('photographer')
-
-
 
 
 @app.route('/logout', methods=['POST', 'GET'])
@@ -237,6 +251,7 @@ def imprint():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("404.html")
+
 
 @app.errorhandler(AssertionError)
 def mysql_error(err):
