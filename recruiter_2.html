@@ -1,145 +1,164 @@
 <!DOCTYPE HTML>
-<!--
-	Projection by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html>
-	<head>
-		<title>Recruiter Dashboard</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="static/css/main.css" />
-	</head>
-	<body class="subpage">
+   <head>
+      <title>Recruiter Dashboard</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="static/css/main.css" />
+   </head>
+   <body class="subpage">
+      <!-- Header -->
+      <header id="header">
+         <div class="inner">
+            <a href="#" class="logo"><strong>Welcome {{username}}</strong></a>
+            <nav id="nav">
+               <a href="/find_artist">Find Artists</a>
+               <a href="/create_project">Create Project</a>
+               <a href="/">Logout</a>
+            </nav>
+            <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+         </div>
+      </header>
+      <center>
+         <h3>View active projects</h3>
+      </center>
+      <table class="table-wrapper">
+         <thead>
+            <tr>
+               <th scope="col">Project Title</th>
+               <th scope="col">Contact Email</th>
+               <th scope="col">Project Description</th>
+            </tr>
+         </thead>
+         <tbody id="myTable">
+            {% for item in projects %}
+            <tr>
+               <td>{{item["project_title"]}}</td>
+               <td>{{item["contact_email"]}}</td>
+               <td>{{item["project_des"]}}</td>
+            </tr>
+            {% endfor %}
+      </table>
+      <center>
+         <h3>Check our database statistics</h3>
+      </center>
+      <div id="piechart" style="width: 900px; height: 500px; margin-left:400px;margin-top:20px"></div>
+      <div id="container" style="margin-left:350px;margin-top:13px;"></div>
+      <br>
+      <footer id="footer">
+         <div class="inner">
+            <div class="copyright">
+               &copy; Gyft 2019
+            </div>
+         </div>
+         <br>
+         <br>
+      </footer>
+      <!-- Scripts -->
+      <script src="https://www.google.com/jsapi"></script>
+      <script src="static/js/jquery.min.js"></script>
+      <script src="static/js/skel.min.js"></script>
+      <script src="static/js/util.js"></script>
+      <script src="static/js/main.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script type="text/javascript">
+         google.charts.load('current', {
+    'packages': ['corechart']
+});
+google.charts.setOnLoadCallback(drawChart);
 
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="#" class="logo"><strong>Welcome {{username}}</strong></a>
+function drawChart() {
 
-					<nav id="nav">
+    var data = google.visualization.arrayToDataTable([
 
-						<a href="/find_artist">Find Artists</a>
-						<a href="/create_project">Create Project</a>
-						<a href="/">Logout</a>
+        ['Domain', 'Number of artist in our database'],
+        ["Illustrator", {
+            {
+                domain_dic["Illustrator"]
+            }
+        }],
+        ["Graphic Design", {
+            {
+                domain_dic["Graphic Design"]
+            }
+        }],
+        ["Animator", {
+            {
+                domain_dic["Animator"]
+            }
+        }],
+        ["Digital Designer", {
+            {
+                domain_dic["Digital Designer"]
+            }
+        }],
+        ["Photographer", {
+            {
+                domain_dic["Photographer"]
+            }
+        }],
+        ["Filmmaker", {
+            {
+                domain_dic["Filmmaker"]
+            }
+        }],
 
+    ]);
+    var options = {
+        width: 720,
+        height: 600,
+        title: 'Distribution of artist domains in our database',
+        colors: ['#4ac68f', '#41E0A9', '#00B973', '#00AA5A', '#00CD8C']
+    };
 
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-					</nav>
-					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-				</div>
-			</header>
-			<center><h3>View active projects</h3></center>
-			<table class="table-wrapper">
-			  <thead>
-			    <tr>
-			      <th scope="col">Project Title</th>
-			      <th scope="col">Contact Email</th>
-			      <th scope="col">Project Description</th>
-			    </tr>
-			  </thead>
-			  <tbody id="myTable">
-			    {% for item in projects %}
-			    <tr>
-			      <td>{{item["project_title"]}}</td>
-			      <td>{{item["contact_email"]}}</td>
-			      <td>{{item["project_des"]}}</td>
-			    </tr>
-			    {% endfor %}
-			</table>
+    chart.draw(data, options);
+} <
+/script> 
+    <script language = "JavaScript">
+    function drawChart() {
+        // Define the chart to be drawn.
+        var data = google.visualization.arrayToDataTable([
+            ['Experience Level', 'Number of Available Freelancers'],
+            ['Less than 1 year', {
+                {
+                    exp_dic['less than 1 year']
+                }
+            }],
+            ['Between 1 and 2', {
+                {
+                    exp_dic['between 1 and 2']
+                }
+            }],
+            ['Between 2 and 3', {
+                {
+                    exp_dic['Abetween 2 and 3']
+                }
+            }],
+            ['Between 3 and 4', {
+                {
+                    exp_dic['between 3 and 4']
+                }
+            }],
+            ['Between 4 and 5', {
+                {
+                    exp_dic['between 4 and 5']
+                }
+            }],
+        ]);
 
+        var options = {
+            title: 'Number of available artists per experience level',
+            colors: ['#4ac68f'],
+            height: 600
+        };
 
-
-			<center><h3>Check our database statistics</h3></center>
-
-
-<div id="piechart" style="width: 900px; height: 500px; margin-left:400px;margin-top:20px"></div>
-<div id="container" style="margin-left:350px;margin-top:13px;"></div>
-
-
-
-
-
-
-
-
-<br>
-			<footer id="footer">
-				<div class="inner">
-
-
-					<div class="copyright">
-						&copy; Gyft 2019
-					</div>
-
-				</div>
-				<br>
-				<br>
-
-			</footer>
-
-		<!-- Scripts -->
-		<script src="https://www.google.com/jsapi"></script>
-			<script src="static/js/jquery.min.js"></script>
-			<script src="static/js/skel.min.js"></script>
-			<script src="static/js/util.js"></script>
-			<script src="static/js/main.js"></script>
-			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-	    <script type="text/javascript">
-	      google.charts.load('current', {'packages':['corechart']});
-	      google.charts.setOnLoadCallback(drawChart);
-
-	      function drawChart() {
-
-	        var data = google.visualization.arrayToDataTable([
-
-					['Domain', 'Number of artist in our database'],
-					["Illustrator",  {{domain_dic["Illustrator"]}}],
-					["Graphic Design",  {{domain_dic["Graphic Design"]}}],
-					["Animator",  {{domain_dic["Animator"]}}],
-					["Digital Designer",  {{domain_dic["Digital Designer"]}}],
-					["Photographer",  {{domain_dic["Photographer"]}}],
-					["Filmmaker",  {{domain_dic["Filmmaker"]}}],
-
-					 ]);
-	        var options = {
-						width: 720,
-	          height: 600,
-	          title: 'Distribution of artist domains in our database',
-	          colors: ['#4ac68f', '#41E0A9', '#00B973', '#00AA5A', '#00CD8C']
-	        };
-
-	        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-	        chart.draw(data, options);
-	      }
-	    </script>
-
-
-
-
- <script language = "JavaScript">
-				function drawChart() {
-					 // Define the chart to be drawn.
-					 var data = google.visualization.arrayToDataTable([
-						 ['Experience Level', 'Number of Available Freelancers'],
-						['Less than 1 year', {{exp_dic['less than 1 year']}}],
-						 ['Between 1 and 2', {{exp_dic['between 1 and 2']}}],
-						['Between 2 and 3', {{exp_dic['Abetween 2 and 3']}}],
-						['Between 3 and 4', {{exp_dic['between 3 and 4']}}],
-						 ['Between 4 and 5', {{exp_dic['between 4 and 5']}}]
-				,
-					 ]);
-
-					 var options = {title: 'Number of available artists per experience level', colors: ['#4ac68f'], height:600};
-
-					 // Instantiate and draw the chart.
-					 var chart = new google.visualization.BarChart(document.getElementById('container'));
-					 chart.draw(data, options);
-				}
-				google.charts.setOnLoadCallback(drawChart);
-		 </script>
-
-	</body>
+        // Instantiate and draw the chart.
+        var chart = new google.visualization.BarChart(document.getElementById('container'));
+        chart.draw(data, options);
+    }
+google.charts.setOnLoadCallback(drawChart); 
+      </script>
+   </body>
 </html>
