@@ -11,6 +11,4 @@ To check the app:
   
   This project has been conducted for the Database and Web Services course at Jacobs University in fall 2018.
   
-  Team members:
-  Backend and Database Implementation: Salma Bouzid. 
-  Front End Development : Anna Ruby, Paushali Roy and Thang Cao Trinh. 
+  
