@@ -1,7 +1,7 @@
 from flask_mysqldb import MySQL
 from passlib.hash import pbkdf2_sha256
 import os
-from flask import Flask, render_template, request,
+from flask import Flask, render_template, request, \
 redirect, url_for, session, flash
 
 
@@ -50,8 +50,8 @@ def artist():
             flash('Oups! This email already exists!', category='danger')
             return render_template("artist_signup.html")
         else:
-            cur.execute(f"INSERT INTO freelancers(first_name, last_name,
-                        email, domain, experience) VALUES({first_name!r},
+            cur.execute(f"INSERT INTO freelancers(first_name, last_name, \
+                        email, domain, experience) VALUES({first_name!r}, \
                         {last_name!r}, {email!r}, {domain!r}, {experience!r})")
             mysql.connection.commit()
             flash('You successfully joined our artist pool :)',
@@ -158,9 +158,9 @@ def create_project():
             skill_level = request.form["skill_level"]
             # insert the new user into the database:
             cur = mysql.connection.cursor()
-            cur.execute(f"INSERT INTO projects(project_title,
-                        contact_email, project_des, skill_level)
-                        VALUES({project_title!r}, {contact_email!r},
+            cur.execute(f"INSERT INTO projects(project_title, \
+                        contact_email, project_des, skill_level) \
+                        VALUES({project_title!r}, {contact_email!r}, \
                         {project_des!r}, {skill_level!r})")
             mysql.connection.commit()
             session["project_title"] = request.form["project_title"]
