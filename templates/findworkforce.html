@@ -1,121 +1,64 @@
 <!DOCTYPE HTML>
-<!--
-	Projection by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
 <html>
-	<head>
-		<title>Find Artists</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="static/css/main.css" />
-	</head>
-	<body class="subpage">
-
-		<!-- Header -->
-			<header id="header">
-				<div class="inner">
-					<a href="index.html" class="logo"><strong>Gyft</strong></a>
-					<nav id="nav">
-						<a href="/">Home</a>
-						<a href="/recruiter">Recruiter Dashboard</a>
-					</nav>
-					<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-				</div>
-			</header>
-
-		<!-- Main -->
-		<br>
-		<h2 style="margin-left:500px;">Select Artists by specialty</h2>
-
-
-		<div id="myBtnContainer">
-
-		  <form action="/showall" method="post" style="display:inline-block">
-		      <button class="btn active" name="showall"  type="submit"> Show All</button>
-		  </form>
-		  <form action="/illustrator" method="post" style="display:inline-block">
-		      <button class="btn" name="illustrator"  type="submit"> Illustrator</button>
-		  </form>
-
-		  <form action="/digital" method="post" style="display:inline-block">
-		      <button class="btn" name="digital"  type="submit"> Digital Designer</button>
-		  </form>
-
-		  <form action="/photographer" method="post" style="display:inline-block" style="display:inline-block">
-		      <button class="btn" name="photographer"  type="submit"> Photographer</button>
-		  </form>
-		  <form action="/filmmaker" method="post" style="display:inline-block">
-		      <button class="btn" name="filmmaker"  type="submit"> Filmmaker</button>
-		  </form>
-
-		  <form action="/graphic" method="post" style="display:inline-block">
-		      <button class="btn" name="graphic"  type="submit"> Graphic Designer </button>
-		  </form>
-
-
-		  </div>
-
-<br>
-	<div class="table-wrapper" style="width:1200px;margin-left:100px">
-		<h1>Our artists</h1>
-
-	<table>
-			<thead>
-				<tr>
-					<th scope="col">Serial</th>
-					<th scope="col">First Name </th>
-					<th scope="col">Last Name</th>
-					<th scope="col">Email</th>
-					<th scope="col">Domain</th>
-					<th scope="col">Experience</th>
-				</tr>
-			</thead>
-			<tbody id="myTable">
-				{% for item in freelancers %}
-				<tr>
-					<td>{{item["id"]}}</td>
-					<td>{{item["first_name"]}}</td>
-					<td>{{item["last_name"]}}</td>
-					<td>{{item["email"]}}</td>
-					<td>{{item["domain"]}}</td>
-					<td>{{item["experience"]}}</td>
-				</tr>
-				{% endfor %}
-
-
-			</tbody>
-		</tbody>
-	</table>
-</div>
-
-
-
-		<!-- Footer -->
-		<br>
-		<br>
-		<br>
-
-			<footer id="footer">
-				<div class="inner">
-
-
-
-
-					<div class="copyright">
-						&copy; Gyft 2019
-					</div>
-					<br>
-					<br>
-				</div>
-			</footer>
-
-		<!-- Scripts -->
-			<script src="static/js/jquery.min.js"></script>
-			<script src="static/js/skel.min.js"></script>
-			<script src="static/js/util.js"></script>
-			<script src="static/js/main.js"></script>
-
-	</body>
+   <head>
+      <title>Create Projects </title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="stylesheet" href="static/css/main.css" />
+   </head>
+   <body class="subpage">
+      <!-- Header -->
+      <header id="header">
+         <div class="inner">
+            <a href="/" class="logo"><strong>Gyft</strong></a>
+            <nav id="nav">
+               <a href="/recruiter">Dashboard</a>
+            </nav>
+            <a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+         </div>
+      </header>
+      <!-- Main -->
+      <section id="main" class="wrapper">
+      <div class="inner">
+      <header class="align-center">
+         <h2>Create new projects</h2>
+         <p> Thank you for your interest in working with us<br> Please fill out the necessary details to post your requirement on our website.<br>We shall connect you to several deserving candidates.</p>
+      </header>
+      <div style="margin-left:380px;">
+         <form role="form" method="post" id="reused_form"  >
+            <div class="row uniform">
+               <div class="6u 12u$">
+                  <input type="text" class="form-control" id="project_title" name="project_title" required maxlength="50" placeholder="Project Title">
+               </div>
+               <div class="6u 12u$">
+                  <input type="email" class="form-control" id="email" required maxlength="50" name ="contact_email" placeholder="Contact Email">
+               </div>
+               <div class="6u 12u$">
+                  <textarea class="form-control" type="textarea" name="project_des" id="desc" placeholder="Detailed Description of the Project" maxlength="6000" rows="7"></textarea>
+               </div>
+               <div class="6u 12u$">
+                  <div class="select-wrapper">
+                     <label for="skill_level" style="text-align:left; float: left; color:#485058"> </label>
+                     <select name="skill_level" class="form-control" placeholder="Select your discipline" id="skill_level">
+                        <option value="">Select your desired skill level </option>
+                        <option value = "beginner">Beginner</option>
+                        <option value = "learner">Learner</option>
+                        <option value = "skilled">Skilled</option>
+                        <option value = "expert">Expert</option>
+                        <option value = "advisory">Advisory</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="6u 12u$">
+                  <button type="submit" style="margin-left:200px;" id="btnContactUs">Post It! &rarr;</button>
+               </div>
+            </div>
+         </form>
+      </div>
+      <!-- Scripts -->
+      <script src="static/js/jquery.min.js"></script>
+      <script src="static/js/skel.min.js"></script>
+      <script src="static/js/util.js"></script>
+      <script src="static/js/main.js"></script>
+   </body>
 </html>
